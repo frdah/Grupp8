@@ -1,11 +1,10 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-
+import React from "react";
+import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   return (
-    <div >
-      
+    <div>
+      <h1>Hej / Lova</h1>
     </div>
   );
 }
