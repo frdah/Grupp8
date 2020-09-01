@@ -1,11 +1,16 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import ProductPage from "./pages/ProductPage";
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div>
-      <h1>Hej / Lova</h1>
-      <h2>Hej /Rebecka</h2>
+      <Switch>
+        <Route path="/">
+          <ProductPage />
+        </Route>
+      </Switch>
     </div>
   );
 }
