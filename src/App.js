@@ -1,13 +1,24 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import ProductDetailPage from "./pages/ProductDetailPage";
+import "./App.css";
+import ProductPage from "./pages/ProductPage";
+import { Switch, Route } from "react-router-dom";
+import CartPage from "./pages/CartPage";
+
 
 function App() {
   return (
     <div>
-      <h1>Hej / Lova</h1>
-      <h2>Hej /Rebecka</h2>
-      <ProductDetailPage/>
+
+      <Switch>
+        <Route path="/cartpage">
+          <CartPage />
+        </Route>
+        <Route path="/">
+          <ProductPage />
+        </Route>
+      </Switch>
+
     </div>
   );
 }
