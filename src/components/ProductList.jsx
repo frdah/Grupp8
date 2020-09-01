@@ -24,12 +24,14 @@ export default function ProductList() {
         {productList &&
           Object.entries(productList).map((itemArray, index) => {
             let item = itemArray[1];
+
             return (
               <div>
                 <ProductCard
                   key={index}
                   id={index}
                   name={item.name}
+                  image={item.images[0].src.small}
                   description={item.description}
                   price={item.price}
                   stock={item.stock}

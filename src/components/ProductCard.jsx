@@ -7,7 +7,7 @@ export default function ProductCard({
   description,
   image,
   price,
-  stock,
+  stock
 }) {
   console.log("ProductCard");
   return (
