@@ -1,13 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import "./App.css";
 
 function App() {
-  return (
-    <div>
-      <h1>Hej / Lova</h1>
-      <h2>Hej /Rebecka</h2>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;
