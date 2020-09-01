@@ -11,7 +11,7 @@ export default function ProductCard({
 }) {
 	console.log("ProductCard")
 	return (
-		<div className="card m-4 p-2" style="width: 18rem">
+		<div className="card m-4 p-2" width="5vw">
 			<div className="card-body p-2">
 				<img className="card-img-top" src={image} alt="" />
 				<h4 className="card-title mt-3">Name: {name}</h4>
