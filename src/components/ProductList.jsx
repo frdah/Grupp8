@@ -7,8 +7,8 @@ export default function ProductList() {
 
   function fetchProductList() {
     fetch("https://mock-data-api.firebaseio.com/e-commerce/products.json")
-      .then((res) => res.json())
-      .then((result) => {
+      .then(res => res.json())
+      .then(result => {
         setProductList(result.all);
       });
   }
