@@ -1,49 +1,54 @@
-import React from 'react'
-import { useContext } from 'react'
-//import { ProductDetailsContext } from '../contexts/TitleContext'
+import React from "react";
+// import { useContext } from "react";
+// import { CartContext } from "../contexts/CartContext";
 
-
-export default function ProductDetails({name, description, price, stock, imageArr, rating}) {
+export default function ProductDetails({
+  name,
+  description,
+  price,
+  stock,
+  imageArr,
+  rating,
+}) {
   let itemObj = {
     name: name,
     price: price,
-    qty: 1
-  } 
-function handleOnClick () {
-if (localStorage.getItem("itemArr") === null){
+    qty: 1,
+  };
+  // const { name, description, price, stock, imageArr, rating } = useContext(
+  //   CartContext
+  // );
+  function handleOnClick() {
+    if (localStorage.getItem("itemArr") === null) {
+      const itemArr = [];
 
-  const itemArr = []
+      itemArr.push(itemObj);
 
+      localStorage.setItem("itemArr", JSON.stringify(itemArr));
 
- itemArr.push(itemObj) 
+      console.log("in if 1");
+    } else {
+      const itemArr = JSON.parse(localStorage.getItem("itemArr"));
 
-  localStorage.setItem("itemArr", JSON.stringify(itemArr));
-  console.log("in if 1")
-}
-else {
-  const itemArr = JSON.parse(localStorage.getItem("itemArr"))
+      let isNewObject = true;
 
-  let isNewObject = true
+      const updatedArr = itemArr.map((item, index) => {
+        console.log("Current name is: ", name);
+        if (item.name === name) {
+          item.qty++;
+          isNewObject = false;
+        }
+        return item;
+      });
+      if (isNewObject) {
+        updatedArr.push(itemObj);
+      }
+      console.log(updatedArr);
 
-  const updatedArr = itemArr.map((item, index) => {
-      console.log("Current name is: ", name)
-      if (item.name === name) {
-        item.qty ++
-        isNewObject = false
-      } 
-      return item
-  })
-  if(isNewObject) {
-    updatedArr.push(itemObj)
-  }
-  console.log(updatedArr)
+      localStorage.setItem("itemArr", JSON.stringify(updatedArr));
+    }
 
-  localStorage.setItem("itemArr", JSON.stringify(updatedArr));
-
-
-}
-
-  /*for (let x = 0; x < itemArr.length; x++) {
+    /*for (let x = 0; x < itemArr.length; x++) {
     if (itemArr[x].name === name) {
       itemArr[x].qty ++
     }
@@ -57,31 +62,34 @@ else {
   }
 
 }*/
+  }
 
-}
-
-
-    return (
-        <div>
-            <div className="col-xl-12 mt-3">
-      <div className="card">
-        {imageArr && <img 
-          className="card-img-top" 
-          src={imageArr[0].src.small} 
-          alt="Card cap" />
-        }
-        <div className="card-body">
-          <h5 className="card-title">{name}</h5>
-          <p>
-              {description}
-          </p>
-          <span>{rating} ★</span><br/>
-          <span>Stock: {stock}</span><br/>
-          <span>Price: {price}:-</span><br/>
-          <button onClick={handleOnClick} className="btn, btn-primary">Buy</button>
+  return (
+    <div>
+      <div className="col-xl-12 mt-3">
+        <div className="card">
+          {imageArr && (
+            <img
+              className="card-img-top"
+              src={imageArr[0].src.small}
+              alt="Card cap"
+            />
+          )}
+          <div className="card-body">
+            <h5 className="card-title">{name}</h5>
+            <p>{description}</p>
+            <span>{rating} ★</span>
+            <br />
+            <span>Stock: {stock}</span>
+            <br />
+            <span>Price: {price}:-</span>
+            <br />
+            <button onClick={handleOnClick} className="btn, btn-primary">
+              Buy
+            </button>
+          </div>
         </div>
       </div>
     </div>
-        </div>
-    )
+  );
 }

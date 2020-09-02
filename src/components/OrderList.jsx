@@ -4,12 +4,13 @@ import { useRef, useEffect, useState } from "react";
 
 export default function OrderList() {
   let totalPrice = 0;
+
   let [discount, setDiscount] = useState(1);
   let [errorMessage, setErrorMessage] = useState("");
-  const itemArr = JSON.parse(localStorage.getItem("itemArr"));
   let [couponList, setCouponList] = useState({});
-
   const couponInput = useRef();
+
+  const itemArr = JSON.parse(localStorage.getItem("itemArr"));
 
   function fetchCouponCodes() {
     fetch("https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json")

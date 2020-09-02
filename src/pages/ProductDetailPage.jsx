@@ -2,9 +2,6 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import ProductDetails from '../components/ProductDetails'
 
-
-
-
 export default function ProductDetailPage({props}) {
     let [productData, setProductData] = useState({})
     let ProductId = props.match.params.id;
@@ -15,8 +12,6 @@ export default function ProductDetailPage({props}) {
         .then(result => {
             
             setProductData(result.products[ProductId])
-
-            
 
         })
         
@@ -29,8 +24,6 @@ export default function ProductDetailPage({props}) {
 
     useEffect(() => {
       }, [productData])
-
-
 
     return (
       <div>
