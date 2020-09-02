@@ -11,7 +11,7 @@ export default function Layout({ children }) {
             Home
           </Link>
           <Link className="navbar-toggler text-info" to="/cartpage">
-            Cart
+            Cart (0)
           </Link>
         </ul>
       </nav>

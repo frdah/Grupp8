@@ -4,18 +4,17 @@ import { useRef, useEffect, useState } from "react";
 
 export default function OrderList() {
   let totalPrice = 0;
-
   let [discount, setDiscount] = useState(1);
   let [errorMessage, setErrorMessage] = useState("");
-  let [couponList, setCouponList] = useState({});
-  const couponInput = useRef();
-
   const itemArr = JSON.parse(localStorage.getItem("itemArr"));
+  let [couponList, setCouponList] = useState({});
+
+  const couponInput = useRef();
 
   function fetchCouponCodes() {
     fetch("https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json")
-      .then((res) => res.json())
-      .then((result) => {
+      .then(res => res.json())
+      .then(result => {
         setCouponList(result);
         console.log(result);
       });
@@ -57,6 +56,7 @@ export default function OrderList() {
                 name={itemObj.name}
                 price={itemObj.price}
                 qty={itemObj.qty}
+                image={itemObj}
               />
             </div>
           );

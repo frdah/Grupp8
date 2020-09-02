@@ -8,12 +8,12 @@ export default function ProductDetails({
   price,
   stock,
   imageArr,
-  rating,
+  rating
 }) {
   let itemObj = {
     name: name,
     price: price,
-    qty: 1,
+    qty: 1
   };
   // const { name, description, price, stock, imageArr, rating } = useContext(
   //   CartContext
