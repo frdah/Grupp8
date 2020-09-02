@@ -17,7 +17,6 @@ export default function ProductCard({
         <h4 className="card-title mt-3">{name}</h4>
         <p className="card-text">{description}</p>
         <h6 className="card-text">Price: {price} SEK</h6>
-        <p className="card-text">In stock: {stock}</p>
         <Link className="btn btn-info" to={`/products/${id}`}>
           Show product
         </Link>
