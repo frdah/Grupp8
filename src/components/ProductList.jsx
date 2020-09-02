@@ -27,7 +27,8 @@ export default function ProductList() {
 							let item = itemArray[1]
 
 							return (
-								<div className="col-sm-4">
+								// TODO: Add key attribute to div. Key should be on the highest level directly after map
+								<div className="col-sm-4"> 
 									<ProductCard
 										key={index}
 										id={item.id}
