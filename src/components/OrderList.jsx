@@ -1,16 +1,39 @@
 import React from "react";
 import OrderItem from "./OrderItem";
+import { useRef } from "react"
 
 export default function OrderList() {
+
+  const itemArr = JSON.parse(localStorage.getItem("itemArr"))
+
+ /* function handleOnClick () {
+    const couponInput = "tjohejjj"
+  }*/
+
   return (
     <div>
       <h2>Order List</h2>
       <OrderItem />
 
-      <p>Add coupon code:</p>
-      <input className="form-control w-25" placeholder="Coupon Code" />
-      <button className="btn btn-primary mb-2">Add Coupon</button>
-      <h5>Total: 0kr </h5>
+      {itemArr &&
+            itemArr.map((itemObj, index) => {
+              
+
+              return (
+                <div className="col-sm-4">
+				{/* TODO: Add key attribute to div. Key should be on the highest level directly after map */}
+                  <OrderItem
+                    key={index}
+                    name={itemObj.name}
+                    price={itemObj.price}
+                    qty={itemObj.qty}
+  
+                  />
+                  <input type="text" />
+                    <button onClick={handleOnClick} ref={couponInput}>Använd kupong</button>
+                </div>
+              );
+            })}
     </div>
   );
 }
