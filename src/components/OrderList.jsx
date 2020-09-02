@@ -1,13 +1,39 @@
 import React from "react";
 import OrderItem from "./OrderItem";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export default function OrderList() {
   const itemArr = JSON.parse(localStorage.getItem("itemArr"));
+  let [couponList, setCouponList] = useState({});
 
-  /* function handleOnClick () {
-    const couponInput = "tjohejjj"
-  }*/
+  const couponInput = useRef();
+
+  function fetchCouponCodes() {
+    fetch("https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json")
+      .then(res => res.json())
+      .then(result => {
+        setCouponList(result);
+        console.log(result);
+      });
+  }
+
+  useEffect(() => {
+    fetchCouponCodes();
+  }, []);
+
+  function handleOnClick() {
+    const couponCode = couponInput.current.value;
+
+    const validCouponCode = Object.entries(couponList).map((item, index) => {
+      console.log(item);
+      if (item[0] === couponCode) {
+        const discount = item[1].discount;
+        console.log("funkar", couponCode, discount);
+      } else {
+        console.log("funkar inte");
+      }
+    });
+  }
 
   return (
     <div>
@@ -25,13 +51,13 @@ export default function OrderList() {
                 price={itemObj.price}
                 qty={itemObj.qty}
               />
-              <input type="text" />
-              <button onClick={handleOnClick} ref={couponInput}>
-                Använd kupong
-              </button>
             </div>
           );
         })}
+
+      <input type="text" ref={couponInput} />
+      <button onClick={handleOnClick}>Använd kupong</button>
+      {/* <p>Totalpris: </p> */}
     </div>
   );
 }
