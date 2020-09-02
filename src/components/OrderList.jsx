@@ -56,7 +56,6 @@ export default function OrderList() {
                 name={itemObj.name}
                 price={itemObj.price}
                 qty={itemObj.qty}
-                image={itemObj}
               />
             </div>
           );
