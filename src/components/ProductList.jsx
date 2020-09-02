@@ -28,7 +28,7 @@ export default function ProductList() {
               <div>
                 <ProductCard
                   key={index}
-                  id={index}
+                  id={item.id}
                   name={item.name}
                   description={item.description}
                   price={item.price}

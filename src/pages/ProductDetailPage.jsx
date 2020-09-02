@@ -5,9 +5,9 @@ import ProductDetails from '../components/ProductDetails'
 
 
 
-export default function ProductDetailPage({id} ) {
+export default function ProductDetailPage({props}) {
     let [productData, setProductData] = useState({})
-    let ProductId = 16065;
+    let ProductId = props.match.params.id;
 
     function fetchImage() {
       fetch(`https://mock-data-api.firebaseio.com/e-commerce.json`)
@@ -33,12 +33,6 @@ export default function ProductDetailPage({id} ) {
       }, [productData])
 
 
-
-    /*        const title = result.products[ProductId].name
-        const description = result.products[ProductId].description
-        const price = result.products[ProductId].price
-        const imageArr = result.products[ProductId].images
-        const stock = result.products[ProductId].stock*/
 
     return (
       <div>

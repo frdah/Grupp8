@@ -9,7 +9,7 @@ export default function ProductCard({
   price,
   stock,
 }) {
-  console.log("ProductCard");
+  console.log(id);
   return (
     <div className="card m-4 p-2">
       <div className="card-body p-2">
