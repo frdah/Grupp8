@@ -5,6 +5,7 @@ import { useRef, useEffect, useState } from "react";
 export default function OrderList() {
   let totalPrice = 0;
   let [discount, setDiscount] = useState(1);
+  let [errorMessage, setErrorMessage] = useState("");
   const itemArr = JSON.parse(localStorage.getItem("itemArr"));
   let [couponList, setCouponList] = useState({});
 
@@ -29,11 +30,12 @@ export default function OrderList() {
     Object.entries(couponList).map((item, index) => {
       console.log(item);
       if (item[0] === couponCode) {
+        setErrorMessage("");
         console.log("funkar", couponCode, discount);
         setDiscount(item[1].discount);
         // return (discount = item[1].discount);
       } else {
-        console.log("funkar inte");
+        setErrorMessage("Kod ej giltig!");
       }
     });
   }
@@ -61,6 +63,7 @@ export default function OrderList() {
 
       <input type="text" ref={couponInput} />
       <button onClick={handleOnClick}>Använd kupong</button>
+      <p>{errorMessage}</p>
       <h3>Totalpris: {totalPrice * discount} SEK</h3>
     </div>
   );
