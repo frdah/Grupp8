@@ -1,39 +1,63 @@
-import React from "react";
-import OrderItem from "./OrderItem";
-import { useRef } from "react"
+import React from "react"
+import OrderItem from "./OrderItem"
+import { useRef, useEffect, useState } from "react"
 
 export default function OrderList() {
+	const itemArr = JSON.parse(localStorage.getItem("itemArr"))
+	let [couponList, setCouponList] = useState({})
 
-  const itemArr = JSON.parse(localStorage.getItem("itemArr"))
+	const couponInput = useRef()
 
- /* function handleOnClick () {
-    const couponInput = "tjohejjj"
-  }*/
+	function fetchCouponCodes() {
+		fetch("https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json")
+			.then((res) => res.json())
+			.then((result) => {
+				setCouponList(result)
+				console.log(result)
+			})
+	}
 
-  return (
-    <div>
-      <h2>Order List</h2>
-      <OrderItem />
+	useEffect(() => {
+		fetchCouponCodes()
+	}, [])
 
-      {itemArr &&
-            itemArr.map((itemObj, index) => {
-              
+	function handleOnClick() {
+		const couponCode = couponInput.current.value
 
-              return (
-                <div className="col-sm-4">
-				{/* TODO: Add key attribute to div. Key should be on the highest level directly after map */}
-                  <OrderItem
-                    key={index}
-                    name={itemObj.name}
-                    price={itemObj.price}
-                    qty={itemObj.qty}
-  
-                  />
-                  <input type="text" />
-                    <button onClick={handleOnClick} ref={couponInput}>Använd kupong</button>
-                </div>
-              );
-            })}
-    </div>
-  );
+		const validCouponCode = Object.entries(couponList).map((item, index) => {
+			console.log(item)
+			if (item[0] === couponCode) {
+				const discount = item[1].discount
+				console.log("funkar", couponCode, discount)
+			} else {
+				console.log("funkar inte")
+			}
+		})
+	}
+
+	return (
+		<div>
+			<h2>Order List</h2>
+			<OrderItem />
+
+			{itemArr &&
+				itemArr.map((itemObj, index) => {
+					return (
+						<div className="col-sm-4">
+							{/* TODO: Add key attribute to div. Key should be on the highest level directly after map */}
+							<OrderItem
+								key={index}
+								name={itemObj.name}
+								price={itemObj.price}
+								qty={itemObj.qty}
+							/>
+						</div>
+					)
+				})}
+
+			<input type="text" ref={couponInput} />
+			<button onClick={handleOnClick}>Använd kupong</button>
+			{/* <p>Totalpris: </p> */}
+		</div>
+	)
 }
