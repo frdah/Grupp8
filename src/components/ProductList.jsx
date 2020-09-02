@@ -28,6 +28,7 @@ export default function ProductList() {
 
               return (
                 <div className="col-sm-4">
+				{/* TODO: Add key attribute to div. Key should be on the highest level directly after map */}
                   <ProductCard
                     key={index}
                     id={item.id}

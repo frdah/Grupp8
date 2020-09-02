@@ -10,9 +10,6 @@ export default function ProductDetails({name, description, price, stock, imageAr
     qty: 1
   } 
 function handleOnClick () {
-console.log("current item", itemObj)
-
-
 if (localStorage.getItem("itemArr") === null){
 
   const itemArr = []
@@ -26,20 +23,19 @@ if (localStorage.getItem("itemArr") === null){
 else {
   const itemArr = JSON.parse(localStorage.getItem("itemArr"))
 
-  const updatedArr = itemArr.map((item, index) => {
-      if (item.name === name) {
-        console.log("found obj", name)
-        item.qty ++
-        return item
-      }
-      else {
-        console.log("no obj")
-        console.log(itemObj)
-        return itemObj
-  
-      }
+  let isNewObject = true
 
+  const updatedArr = itemArr.map((item, index) => {
+      console.log("Current name is: ", name)
+      if (item.name === name) {
+        item.qty ++
+        isNewObject = false
+      } 
+      return item
   })
+  if(isNewObject) {
+    updatedArr.push(itemObj)
+  }
   console.log(updatedArr)
 
   localStorage.setItem("itemArr", JSON.stringify(updatedArr));

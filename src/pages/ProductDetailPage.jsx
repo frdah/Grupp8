@@ -15,7 +15,6 @@ export default function ProductDetailPage({props}) {
         .then(result => {
             
             setProductData(result.products[ProductId])
-            console.log(productData)
 
             
 
@@ -29,7 +28,6 @@ export default function ProductDetailPage({props}) {
     }, [])
 
     useEffect(() => {
-        console.log(productData)
       }, [productData])
 
 
