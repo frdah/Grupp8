@@ -3,6 +3,8 @@ import OrderItem from "./OrderItem";
 import { useRef, useEffect, useState } from "react";
 
 export default function OrderList() {
+  let totalPrice = 0;
+  let [discount, setDiscount] = useState(1);
   const itemArr = JSON.parse(localStorage.getItem("itemArr"));
   let [couponList, setCouponList] = useState({});
 
@@ -10,8 +12,8 @@ export default function OrderList() {
 
   function fetchCouponCodes() {
     fetch("https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json")
-      .then(res => res.json())
-      .then(result => {
+      .then((res) => res.json())
+      .then((result) => {
         setCouponList(result);
         console.log(result);
       });
@@ -24,11 +26,12 @@ export default function OrderList() {
   function handleOnClick() {
     const couponCode = couponInput.current.value;
 
-    const validCouponCode = Object.entries(couponList).map((item, index) => {
+    Object.entries(couponList).map((item, index) => {
       console.log(item);
       if (item[0] === couponCode) {
-        const discount = item[1].discount;
         console.log("funkar", couponCode, discount);
+        setDiscount(item[1].discount);
+        // return (discount = item[1].discount);
       } else {
         console.log("funkar inte");
       }
@@ -42,6 +45,7 @@ export default function OrderList() {
 
       {itemArr &&
         itemArr.map((itemObj, index) => {
+          totalPrice += itemObj.price * itemObj.qty;
           return (
             <div className="col-sm-4">
               {/* TODO: Add key attribute to div. Key should be on the highest level directly after map */}
@@ -57,7 +61,7 @@ export default function OrderList() {
 
       <input type="text" ref={couponInput} />
       <button onClick={handleOnClick}>Använd kupong</button>
-      {/* <p>Totalpris: </p> */}
+      <h3>Totalpris: {totalPrice * discount} SEK</h3>
     </div>
   );
 }

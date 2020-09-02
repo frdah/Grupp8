@@ -1,6 +1,6 @@
 import React from 'react'
 import { useContext } from 'react'
-//import import { ProductDetailsContext } from '../contexts/TitleContext'
+//import { ProductDetailsContext } from '../contexts/TitleContext'
 
 
 export default function ProductDetails({name, description, price, stock, imageArr, rating}) {
