@@ -4,6 +4,7 @@ import OrderForm from "./OrderForm"
 
 import { useRef, useEffect, useState, useContext } from "react"
 import { CartContext } from "../contexts/CartContext"
+import ClearCartBtn from "./ClearCartBtn"
 
 export default function OrderList() {
 	let [discount, setDiscount] = useState(1)
@@ -55,6 +56,7 @@ export default function OrderList() {
 	return (
 		<div>
 			<h2>Order List</h2>
+			<ClearCartBtn/>
 			<OrderItem />
 
 			{cartList == "" ? setCartList(localStorageArr) : ""}
