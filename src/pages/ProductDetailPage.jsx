@@ -1,41 +1,62 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import ProductDetails from '../components/ProductDetails'
+import React from "react";
+import { useEffect, useState } from "react";
+import ProductDetails from "../components/ProductDetails";
+import ProductReview from "../components/ProductReview";
 
-export default function ProductDetailPage({props}) {
-    let [productData, setProductData] = useState({})
-    let ProductId = props.match.params.id;
+export default function ProductDetailPage({ props }) {
+  let [reviews, setReviews] = useState({});
+  let [productData, setProductData] = useState({});
+  let ProductId = props.match.params.id;
 
-    function fetchImage() {
-      fetch(`https://mock-data-api.firebaseio.com/e-commerce.json`)
-        .then(res => res.json())
-        .then(result => {
-            
-            setProductData(result.products[ProductId])
+  function fetchReviews() {
+    fetch(`https://mock-data-api.firebaseio.com/e-commerce/reviews.json`)
+      .then(res => res.json())
+      .then(result => {
+        setReviews(result[ProductId]);
+        console.log(result[ProductId]);
+      });
+  }
 
-        })
-        
-    }
-  
-    useEffect(() => {
-      fetchImage()
+  function fetchProduct() {
+    fetch(`https://mock-data-api.firebaseio.com/e-commerce.json`)
+      .then(res => res.json())
+      .then(result => {
+        setProductData(result.products[ProductId]);
+      });
+  }
 
-    }, [])
+  useEffect(() => {
+    fetchProduct();
+    fetchReviews();
+  }, []);
 
-    useEffect(() => {
-      }, [productData])
+  // useEffect(() => {}, [productData])
 
-    return (
-      <div>
-        <h1>Image Detail Page</h1>
-        <ProductDetails
-        name= {productData.name}
-        description= {productData.description}
-        price= {productData.price}
-        stock= {productData.stock}
-        rating= {productData.rating}
-        imageArr= {productData.images}
-        />
-      </div>
-    )
+  return (
+    <div>
+      <h1>Image Detail Page</h1>
+      <ProductDetails
+        name={productData.name}
+        description={productData.description}
+        price={productData.price}
+        stock={productData.stock}
+        rating={productData.rating}
+        imageArr={productData.images}
+      />
+      <h3>Reviews</h3>
+
+      {reviews &&
+        Object.entries(reviews).map((review, index) => {
+          return (
+            <ProductReview
+              author={review[1].author.name}
+              date={review[1].date}
+              description={review[1].description}
+              rating={review[1].rating}
+              title={review[1].title}
+            />
+          );
+        })}
+    </div>
+  );
 }

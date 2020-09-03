@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext } from "react"
+import { useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
 // import { useContext } from "react";
 // import { CartContext } from "../contexts/CartContext";
@@ -17,7 +17,7 @@ export default function ProductDetails({
     price: price,
     qty: 1
   };
-  const { cartList, setCartList} = useContext(CartContext)
+  const { cartList, setCartList } = useContext(CartContext);
   // const { name, description, price, stock, imageArr, rating } = useContext(
   //   CartContext
   // );
@@ -26,7 +26,7 @@ export default function ProductDetails({
       const itemArr = [];
 
       itemArr.push(itemObj);
-      setCartList(itemArr)
+      setCartList(itemArr);
 
       localStorage.setItem("itemArr", JSON.stringify(itemArr));
 
@@ -48,8 +48,8 @@ export default function ProductDetails({
         updatedArr.push(itemObj);
       }
       console.log(updatedArr);
-      
-      setCartList(updatedArr)
+
+      setCartList(updatedArr);
       localStorage.setItem("itemArr", JSON.stringify(updatedArr));
     }
 
