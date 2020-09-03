@@ -1,15 +1,19 @@
 import React from "react"
 import OrderItem from "./OrderItem"
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect, useState, useContext } from "react"
+import { CartContext } from "../contexts/CartContext"
 
 export default function OrderList() {
 	let totalPrice = 0
 	let [discount, setDiscount] = useState(1)
 	let [errorMessage, setErrorMessage] = useState("")
-	const itemArr = JSON.parse(localStorage.getItem("itemArr"))
+	const localStorageArr = JSON.parse(localStorage.getItem("itemArr"))
 	let [couponList, setCouponList] = useState({})
 
 	const couponInput = useRef()
+
+	const {cartList, setCartList} = useContext(CartContext)
+	console.log("cartList",cartList)
 
 	function fetchCouponCodes() {
 		fetch("https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json")
@@ -24,29 +28,67 @@ export default function OrderList() {
 		fetchCouponCodes()
 	}, [])
 
-	function handleOnClick() {
-		const couponCode = couponInput.current.value
 
+	function handleOnClick() {
+		const couponCode = couponInput.current.value;
+	
 		Object.entries(couponList).map((item, index) => {
-			console.log(item)
+			console.log(item);
 			if (item[0] === couponCode) {
-				setErrorMessage("")
-				console.log("funkar", couponCode, discount)
-				setDiscount(item[1].discount)
-				// return (discount = item[1].discount);
-			} else {
-				setErrorMessage("Kod ej giltig!")
-			}
-		})
+			  setErrorMessage("");
+			  console.log("funkar", couponCode, discount);
+			  return setDiscount(item[1].discount);
+			  
+			  // return (discount = item[1].discount);
+			// } else {
+			//   console.log("funkar inte");
+			//   return setErrorMessage("Kod ej giltig!");
+			 }
+		  });
+		
 	}
+
+	// function handleOnClick() {
+	// 	const couponCode = couponInput.current.value
+
+	// 	Object.entries(couponList).map((item, index) => {
+	// 		console.log(item)
+	// 		if (item[0] === couponCode) {
+	// 			setErrorMessage("")
+	// 			console.log("funkar", couponCode, discount)
+	// 			setDiscount(item[1].discount)
+	// 			// return (discount = item[1].discount);
+	// 		} else {
+	// 			setErrorMessage("Kod ej giltig!")
+	// 		}
+	// 	})
+
+
+	// 	const couponArr = Object.entries(couponList)
+	// 	for (let x = 0; x < couponArr.length; x++) {
+
+	// 		if (couponArr[x][0] === couponCode) {
+	// 			setErrorMessage("")
+	// 			console.log("funkar", couponCode, discount)
+	// 			setDiscount(couponArr[1].discount)
+	// 			// return (discount = item[1].discount);
+	// 		} else {
+	// 			setErrorMessage("Kod ej giltig!")
+	// 		}
+
+	// 	}
+
+
+	// }
 
 	return (
 		<div>
 			<h2>Order List</h2>
 			<OrderItem />
 
-			{itemArr &&
-				itemArr.map((itemObj, index) => {
+			{cartList == "" ? setCartList(localStorageArr) : ""}
+			{cartList &&
+				cartList.map((itemObj, index) => {
 					totalPrice += itemObj.price * itemObj.qty
 					return (
 						<div className="col-sm-4">
