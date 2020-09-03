@@ -1,10 +1,11 @@
 import React from "react"
 import OrderItem from "./OrderItem"
+import OrderForm from "./OrderForm"
+
 import { useRef, useEffect, useState, useContext } from "react"
 import { CartContext } from "../contexts/CartContext"
 
 export default function OrderList() {
-	let totalPrice = 0
 	let [discount, setDiscount] = useState(1)
 	let [errorMessage, setErrorMessage] = useState("")
 	const localStorageArr = JSON.parse(localStorage.getItem("itemArr"))
@@ -12,7 +13,9 @@ export default function OrderList() {
 
 	const couponInput = useRef()
 
-	const {cartList, setCartList} = useContext(CartContext)
+	const {cartList, setCartList, totalPrice, setTotalPrice} = useContext(CartContext)
+	let totalPriceCount = 0
+
 	console.log("cartList",cartList)
 
 	function fetchCouponCodes() {
@@ -39,7 +42,6 @@ export default function OrderList() {
 			  console.log("funkar", couponCode, discount);
 			  return setDiscount(item[1].discount);
 			  
-			  // return (discount = item[1].discount);
 			// } else {
 			//   console.log("funkar inte");
 			//   return setErrorMessage("Kod ej giltig!");
@@ -48,38 +50,7 @@ export default function OrderList() {
 		
 	}
 
-	// function handleOnClick() {
-	// 	const couponCode = couponInput.current.value
 
-	// 	Object.entries(couponList).map((item, index) => {
-	// 		console.log(item)
-	// 		if (item[0] === couponCode) {
-	// 			setErrorMessage("")
-	// 			console.log("funkar", couponCode, discount)
-	// 			setDiscount(item[1].discount)
-	// 			// return (discount = item[1].discount);
-	// 		} else {
-	// 			setErrorMessage("Kod ej giltig!")
-	// 		}
-	// 	})
-
-
-	// 	const couponArr = Object.entries(couponList)
-	// 	for (let x = 0; x < couponArr.length; x++) {
-
-	// 		if (couponArr[x][0] === couponCode) {
-	// 			setErrorMessage("")
-	// 			console.log("funkar", couponCode, discount)
-	// 			setDiscount(couponArr[1].discount)
-	// 			// return (discount = item[1].discount);
-	// 		} else {
-	// 			setErrorMessage("Kod ej giltig!")
-	// 		}
-
-	// 	}
-
-
-	// }
 
 	return (
 		<div>
@@ -89,7 +60,8 @@ export default function OrderList() {
 			{cartList == "" ? setCartList(localStorageArr) : ""}
 			{cartList &&
 				cartList.map((itemObj, index) => {
-					totalPrice += itemObj.price * itemObj.qty
+					setTotalPrice( totalPriceCount += itemObj.price * itemObj.qty)
+
 					return (
 						<div className="col-sm-4">
 							{/* TODO: Add key attribute to div. Key should be on the highest level directly after map */}
@@ -102,11 +74,14 @@ export default function OrderList() {
 						</div>
 					)
 				})}
-
+				
+				
 			<input type="text" ref={couponInput} />
 			<button onClick={handleOnClick}>Använd kupong</button>
 			<p>{errorMessage}</p>
-			<h3>Totalpris: {(totalPrice * discount).toFixed(2)} SEK</h3>
+			{setTotalPrice(totalPriceCount * discount)}
+			<h3>Totalpris: {totalPrice.toFixed(2)} SEK</h3>
+			<OrderForm/>
 		</div>
 	)
 }

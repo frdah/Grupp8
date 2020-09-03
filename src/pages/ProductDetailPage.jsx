@@ -1,12 +1,23 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import ProductDetails from "../components/ProductDetails";
+import ProductReview from "../components/ProductReview";
 
 export default function ProductDetailPage({ props }) {
+  let [reviews, setReviews] = useState({});
   let [productData, setProductData] = useState({});
   let ProductId = props.match.params.id;
 
-  function fetchImage() {
+  function fetchReviews() {
+    fetch(`https://mock-data-api.firebaseio.com/e-commerce/reviews.json`)
+      .then(res => res.json())
+      .then(result => {
+        setReviews(result[ProductId]);
+        console.log(result[ProductId]);
+      });
+  }
+
+  function fetchProduct() {
     fetch(`https://mock-data-api.firebaseio.com/e-commerce.json`)
       .then(res => res.json())
       .then(result => {
@@ -15,10 +26,11 @@ export default function ProductDetailPage({ props }) {
   }
 
   useEffect(() => {
-    fetchImage();
+    fetchProduct();
+    fetchReviews();
   }, []);
 
-  useEffect(() => {}, [productData]);
+  // useEffect(() => {}, [productData])
 
   return (
     <div>
@@ -31,6 +43,20 @@ export default function ProductDetailPage({ props }) {
         rating={productData.rating}
         imageArr={productData.images}
       />
+      <h3>Reviews</h3>
+
+      {reviews &&
+        Object.entries(reviews).map((review, index) => {
+          return (
+            <ProductReview
+              author={review[1].author.name}
+              date={review[1].date}
+              description={review[1].description}
+              rating={review[1].rating}
+              title={review[1].title}
+            />
+          );
+        })}
     </div>
   );
 }

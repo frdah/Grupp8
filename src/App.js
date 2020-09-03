@@ -11,10 +11,12 @@ import Layout from "./components/Layout";
 
 function App() {
   let [cartList, setCartList] = useState([])
+  let [totalPrice, setTotalPrice] = useState(0)
+
 
   return (
     <div>
-      <CartContext.Provider value={{cartList, setCartList}}>
+      <CartContext.Provider value={{cartList, setCartList, totalPrice, setTotalPrice}}>
       <Switch>
         <Route
           path="/products/:id"
