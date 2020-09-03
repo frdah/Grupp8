@@ -10,7 +10,9 @@ export default function OrderForm({total}) {
   console.log(totalPrice)
 
   function handlePostOrder () {
-    const url = ORDER_URL
+    if (cartList != "" && userNameInput.current.value != "") {
+
+      const url = ORDER_URL
     const data = {
       name: userNameInput.current.value,
       order: cartList,
@@ -25,6 +27,8 @@ export default function OrderForm({total}) {
     localStorage.clear()
     setCartList([])
 
+    }
+    
   }
 
 
