@@ -4,7 +4,7 @@ import {CartContext} from "../contexts/CartContext"
 
 export default function OrderForm({total}) {
   const ORDER_URL = "https://mock-data-api.firebaseio.com/e-commerce/orders/group-8.json"
-  const {cartList, totalPrice} = useContext(CartContext)
+  const {setCartList, cartList, totalPrice} = useContext(CartContext)
   const userNameInput = useRef()
 
   console.log(totalPrice)
@@ -22,6 +22,9 @@ export default function OrderForm({total}) {
       body: JSON.stringify(data)
     })
     
+    localStorage.clear()
+    setCartList([])
+
   }
 
 
