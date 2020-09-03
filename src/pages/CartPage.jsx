@@ -7,7 +7,7 @@ export default function CartPage() {
     <div className="container">
       <h1>Cart Page</h1>
       <OrderList />
-      <OrderForm />
+      {/* <OrderForm /> */}
     </div>
   );
 }

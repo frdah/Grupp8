@@ -2,17 +2,19 @@ import React from "react";
 import {useContext, useRef} from "react"
 import {CartContext} from "../contexts/CartContext"
 
-export default function OrderForm() {
+export default function OrderForm({total}) {
   const ORDER_URL = "https://mock-data-api.firebaseio.com/e-commerce/orders/group-8.json"
-  const {cartList} = useContext(CartContext)
+  const {cartList, totalPrice} = useContext(CartContext)
   const userNameInput = useRef()
+
+  console.log(totalPrice)
 
   function handlePostOrder () {
     const url = ORDER_URL
     const data = {
       name: userNameInput.current.value,
       order: cartList,
-      total: ""
+      total: totalPrice.toFixed(2)
     }
 
     fetch(url, {
