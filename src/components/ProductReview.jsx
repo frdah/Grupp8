@@ -12,9 +12,9 @@ export default function ProductReview({
 		<div>
 			<h5>{title}</h5>
 			<p>{description}</p>
-			<p>{author}</p>
-			<p>{date}</p>
-			<p>{rating}</p>
+			<p>Author: {author}</p>
+			<p>Date: {date}</p>
+			<p>Rating: {rating}</p>
 		</div>
 	)
 }
