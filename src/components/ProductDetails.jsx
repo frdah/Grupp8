@@ -81,17 +81,16 @@ export default function ProductDetails({
 						/>
 					)}
 					<div className="card-body">
-						<h5 className="card-title">{name}</h5>
-						<p>{description}</p>
-						<span>{rating} ★</span>
-						<br />
-						<span>Stock: {stock}</span>
-						<br />
-						<span>Price: {price}:-</span>
-						<br />
-						<button onClick={handleOnClick} className="btn, btn-primary">
-							Buy
-						</button>
+						<h4 className="card-title">{name}</h4>
+						<p className="font-weight-light">{description}</p>
+						<p className="mb-0">★ {rating}</p>
+						<p>In stock: {stock}</p>
+						<div className="row pr-3">
+							<h5 className="col-8 font-weight-bold">{price}:-</h5>
+							<button onClick={handleOnClick} className="col-4 btn btn-info ">
+								Add to cart
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

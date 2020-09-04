@@ -13,7 +13,7 @@ export default function ProductReview({
 			<div className="col-12 col-md-6 col-xl-6 mt-3">
 				<div className="card">
 					<div className="card-header bg-light">
-						<h5 className="card-title mb-0">{title}</h5>
+						<h6 className="card-title mb-0">"{title}"</h6>
 					</div>
 					<div className="card-body">
 						<p className="">{description}</p>
