@@ -1,17 +1,15 @@
 .card-img {
-  object-fit: cover;
-  width: 140px;
-  height: 100%;
+	object-fit: cover;
+	width: 140px;
+	height: 100%;
 }
 
 .img-productlist {
-  object-fit: cover;
-  width: 100%;
-  height: 180px;
+	object-fit: cover;
+	width: 100%;
+	height: 180px;
 }
 
-.card {
-  min-height: 370px;
-}
-ul {
+.product-card {
+	min-height: 370px;
 }
