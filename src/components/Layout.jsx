@@ -16,10 +16,6 @@ export default function Layout({ children }) {
 						<Link className="navbar-toggler border-0 m-1" to="/cartpage">
 							Cart ({JSON.parse(localStorage.getItem("itemArr")).length})
 						</Link>
-						{
-							(console.log("HEJ"),
-							console.log(JSON.parse(localStorage.getItem("itemArr"))))
-						}
 					</ul>
 				</div>
 			</nav>
