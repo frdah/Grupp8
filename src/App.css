@@ -13,3 +13,9 @@
 .product-card {
 	min-height: 370px;
 }
+
+h1 {
+	color: rgb(103, 116, 116);
+	font-size: 20px;
+	padding: 2vh 2vw;
+}

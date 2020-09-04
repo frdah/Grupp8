@@ -11,7 +11,7 @@ export default function ProductCard({
 }) {
 	const shortDescription = description.split(" ").slice(0, 10).join(" ")
 	return (
-		<div className="product-card card my-3 mx-2 bg-light shadow">
+		<div className="product-card card mt-3 mx-2 bg-light shadow">
 			<div className="card-body p-3">
 				<img className="card-img-top img-productlist" src={image} alt="" />
 				<h4 className="card-title mt-3">{name}</h4>
