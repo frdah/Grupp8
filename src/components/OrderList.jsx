@@ -14,10 +14,12 @@ export default function OrderList() {
 
 	const couponInput = useRef()
 
-	const {cartList, setCartList, totalPrice, setTotalPrice} = useContext(CartContext)
+	const { cartList, setCartList, totalPrice, setTotalPrice } = useContext(
+		CartContext
+	)
 	let totalPriceCount = 0
 
-	console.log("cartList",cartList)
+	console.log("cartList", cartList)
 
 	function fetchCouponCodes() {
 		fetch("https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json")
@@ -32,37 +34,33 @@ export default function OrderList() {
 		fetchCouponCodes()
 	}, [])
 
-
 	function handleOnClick() {
-		const couponCode = couponInput.current.value;
-	
+		const couponCode = couponInput.current.value
+
 		Object.entries(couponList).map((item, index) => {
-			console.log(item);
+			console.log(item)
 			if (item[0] === couponCode) {
-			  setErrorMessage("");
-			  console.log("funkar", couponCode, discount);
-			  return setDiscount(item[1].discount);
-			  
-			// } else {
-			//   console.log("funkar inte");
-			//   return setErrorMessage("Kod ej giltig!");
-			 }
-		  });
-		
+				setErrorMessage("")
+				console.log("funkar", couponCode, discount)
+				return setDiscount(item[1].discount)
+
+				// } else {
+				//   console.log("funkar inte");
+				//   return setErrorMessage("Kod ej giltig!");
+			}
+		})
 	}
-
-
 
 	return (
 		<div>
 			<h2>Order List</h2>
-			<ClearCartBtn/>
+			<ClearCartBtn />
 			<OrderItem />
 
 			{cartList == "" ? setCartList(localStorageArr) : ""}
 			{cartList &&
 				cartList.map((itemObj, index) => {
-					setTotalPrice( totalPriceCount += itemObj.price * itemObj.qty)
+					setTotalPrice((totalPriceCount += itemObj.price * itemObj.qty))
 
 					return (
 						<div className="col-sm-4">
@@ -76,14 +74,13 @@ export default function OrderList() {
 						</div>
 					)
 				})}
-				
-				
+
 			<input type="text" ref={couponInput} />
-			<button onClick={handleOnClick}>Använd kupong</button>
+			<button onClick={handleOnClick}>Add promo code</button>
 			<p>{errorMessage}</p>
 			{setTotalPrice(totalPriceCount * discount)}
 			<h3>Totalpris: {totalPrice.toFixed(2)} SEK</h3>
-			<OrderForm/>
+			<OrderForm />
 		</div>
 	)
 }

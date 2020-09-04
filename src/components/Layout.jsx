@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export default function Layout({ children }) {
 	return (
 		<div>
-			<nav className="navbar mb-10 navbar-light bg-light">
+			<nav className="navbar navbar-light bg-light">
 				<div>
 					<h1>Webshop no 8</h1>
 				</div>
@@ -14,8 +14,12 @@ export default function Layout({ children }) {
 							Home
 						</Link>
 						<Link className="navbar-toggler border-0 m-1" to="/cartpage">
-							Cart (0)
+							Cart ({JSON.parse(localStorage.getItem("itemArr")).length})
 						</Link>
+						{
+							(console.log("HEJ"),
+							console.log(JSON.parse(localStorage.getItem("itemArr"))))
+						}
 					</ul>
 				</div>
 			</nav>
