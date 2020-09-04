@@ -42,7 +42,7 @@ export default function ProductDetailPage({ props }) {
 				rating={productData.rating}
 				imageArr={productData.images}
 			/>
-			<h3 className="row justify-content-md-center pt-5">Reviews</h3>
+			<h3 className="row justify-content-center pt-5">Reviews</h3>
 
 			{reviews &&
 				Object.entries(reviews).map((review, index) => {

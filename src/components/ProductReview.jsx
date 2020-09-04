@@ -10,7 +10,7 @@ export default function ProductReview({
 }) {
 	return (
 		<div className="row justify-content-md-center">
-			<div className="col-xl-6 mt-3">
+			<div className="col-12 col-md-6 col-xl-6 mt-3">
 				<div className="card">
 					<div className="card-body">
 						<h5 className="card-title">{title}</h5>

@@ -70,8 +70,8 @@ export default function ProductDetails({
 	}
 
 	return (
-		<div className="row justify-content-md-center">
-			<div className="col-xl-6 mt-3">
+		<div className="row justify-content-center">
+			<div className="col-12 col-md-6 col-xl-6 mt-3">
 				<div className="card">
 					{imageArr && (
 						<img
