@@ -53,8 +53,14 @@ export default function OrderList() {
 
 	return (
 		<div>
-			<h2>Order List</h2>
-			<ClearCartBtn />
+			<h3>My cart</h3>
+
+			<div className="row mt-5">
+				<h6 className="col-md-8 col-xl-8 col-sm-12">Product</h6>
+				<h6 className="col-md-2 col-xl-2 col-sm-12">Price (SEK)</h6>
+				<h6 className="col-md-2 col-xl-2 col-sm-12">Quantity</h6>
+			</div>
+
 			<OrderItem />
 
 			{cartList == "" ? setCartList(localStorageArr) : ""}
@@ -63,7 +69,7 @@ export default function OrderList() {
 					setTotalPrice((totalPriceCount += itemObj.price * itemObj.qty))
 
 					return (
-						<div className="col-sm-4">
+						<div>
 							{/* TODO: Add key attribute to div. Key should be on the highest level directly after map */}
 							<OrderItem
 								key={index}
@@ -75,11 +81,20 @@ export default function OrderList() {
 					)
 				})}
 
-			<input type="text" ref={couponInput} />
-			<button onClick={handleOnClick}>Add promo code</button>
+			<ClearCartBtn />
+
+			<input
+				type="text"
+				ref={couponInput}
+				placeholder=" Add promo code"
+				className="mt-4 mb-2"
+			/>
+			<button onClick={handleOnClick} className="ml-2">
+				Add promo code
+			</button>
 			<p>{errorMessage}</p>
 			{setTotalPrice(totalPriceCount * discount)}
-			<h3>Totalpris: {totalPrice.toFixed(2)} SEK</h3>
+			<h5 className="mb-4">Total: {totalPrice.toFixed(2)} SEK</h5>
 			<OrderForm />
 		</div>
 	)
