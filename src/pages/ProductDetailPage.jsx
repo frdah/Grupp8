@@ -35,6 +35,7 @@ export default function ProductDetailPage({ props }) {
 	return (
 		<div>
 			<ProductDetails
+			
 				name={productData.name}
 				description={productData.description}
 				price={productData.price}
@@ -48,6 +49,7 @@ export default function ProductDetailPage({ props }) {
 				Object.entries(reviews).map((review, index) => {
 					return (
 						<ProductReview
+							key = {index}
 							author={review[1].author.name}
 							date={review[1].date}
 							description={review[1].description}

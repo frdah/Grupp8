@@ -25,12 +25,12 @@ export default function ProductList() {
 					{productList &&
 						Object.entries(productList).map((itemArray, index) => {
 							let item = itemArray[1]
-
+							
 							return (
-								<div className="col-12 col-md-6 col-xl-4 mt-5">
-									{/* TODO: Add key attribute to div. Key should be on the highest level directly after map */}
+								<div className="col-12 col-md-6 col-xl-4 mt-5" key={item.id}>
+									
 									<ProductCard
-										key={index}
+										
 										id={item.id}
 										name={item.name}
 										description={item.description}

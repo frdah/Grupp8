@@ -53,20 +53,6 @@ export default function ProductDetails({
 			localStorage.setItem("itemArr", JSON.stringify(updatedArr))
 		}
 
-		/*for (let x = 0; x < itemArr.length; x++) {
-    if (itemArr[x].name === name) {
-      itemArr[x].qty ++
-    }
-    else {
-      itemArr.push(itemObj) 
-      localStorage.setItem("itemArr", JSON.stringify(itemArr));
-
-    }
-    console.log(itemArr) 
-
-  }
-
-}*/
 	}
 
 	return (
