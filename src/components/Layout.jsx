@@ -2,6 +2,19 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 export default function Layout({ children }) {
+
+	function getQty () {
+		const itemArr = JSON.parse(localStorage.getItem("itemArr"))
+		let cart = 0;
+		if (JSON.parse(localStorage.getItem("itemArr")) === null) {
+			return cart;
+		}
+		for (let x = 0; x < itemArr.length; x++) {
+			cart += itemArr[x].qty
+		}
+		return cart;
+	}
+
 	return (
 		<div>
 			<nav className="navbar navbar-light bg-light">
@@ -14,7 +27,7 @@ export default function Layout({ children }) {
 							Home
 						</Link>
 						<Link className="navbar-toggler border-0 m-1" to="/cartpage">
-							Cart ({JSON.parse(localStorage.getItem("itemArr")).length})
+							Cart ({getQty()})
 						</Link>
 					</ul>
 				</div>
