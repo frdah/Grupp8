@@ -2,17 +2,16 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 export default function Layout({ children }) {
-
-	function getQty () {
+	function getQty() {
 		const itemArr = JSON.parse(localStorage.getItem("itemArr"))
-		let cart = 0;
+		let cart = 0
 		if (JSON.parse(localStorage.getItem("itemArr")) === null) {
-			return cart;
+			return cart
 		}
 		for (let x = 0; x < itemArr.length; x++) {
 			cart += itemArr[x].qty
 		}
-		return cart;
+		return cart
 	}
 
 	return (
@@ -24,7 +23,7 @@ export default function Layout({ children }) {
 				<div>
 					<ul className="m-0 p-0">
 						<Link className="navbar-toggler border-0 m-1" to="/">
-							Home
+							Shop
 						</Link>
 						<Link className="navbar-toggler border-0 m-1" to="/cartpage">
 							Cart ({getQty()})
