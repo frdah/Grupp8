@@ -9,7 +9,7 @@ export default function OrderForm({ total }) {
 	const userNameInput = useRef()
 
 	function handlePostOrder() {
-		if (cartList != "" && userNameInput.current.value != "") {
+		if (cartList !== null && cartList !== [] && userNameInput.current.value !== "") {
 			const url = ORDER_URL
 			const data = {
 				name: userNameInput.current.value,
