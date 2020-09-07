@@ -19,14 +19,11 @@ export default function OrderList() {
 	)
 	let totalPriceCount = 0
 
-	console.log("cartList", cartList)
-
 	function fetchCouponCodes() {
 		fetch("https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json")
 			.then((res) => res.json())
 			.then((result) => {
 				setCouponList(result)
-				console.log(result)
 			})
 	}
 
@@ -38,15 +35,9 @@ export default function OrderList() {
 		const couponCode = couponInput.current.value
 
 		Object.entries(couponList).map((item, index) => {
-			console.log(item)
 			if (item[0] === couponCode) {
 				setErrorMessage("")
-				console.log("funkar", couponCode, discount)
 				return setDiscount(item[1].discount)
-
-				// } else {
-				//   console.log("funkar inte");
-				//   return setErrorMessage("Kod ej giltig!");
 			}
 		})
 	}
@@ -70,7 +61,6 @@ export default function OrderList() {
 
 					return (
 						<div>
-							{/* TODO: Add key attribute to div. Key should be on the highest level directly after map */}
 							<OrderItem
 								key={index}
 								name={itemObj.name}

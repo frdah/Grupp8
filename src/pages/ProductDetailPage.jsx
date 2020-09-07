@@ -13,7 +13,6 @@ export default function ProductDetailPage({ props }) {
 			.then((res) => res.json())
 			.then((result) => {
 				setReviews(result[ProductId])
-				console.log(result[ProductId])
 			})
 	}
 
@@ -29,8 +28,6 @@ export default function ProductDetailPage({ props }) {
 		fetchProduct()
 		fetchReviews()
 	}, [])
-
-	// useEffect(() => {}, [productData])
 
 	return (
 		<div>

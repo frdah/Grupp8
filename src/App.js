@@ -13,7 +13,6 @@ function App() {
   let [cartList, setCartList] = useState([])
   let [totalPrice, setTotalPrice] = useState(0)
 
-
   return (
     <div>
       <CartContext.Provider value={{cartList, setCartList, totalPrice, setTotalPrice}}>

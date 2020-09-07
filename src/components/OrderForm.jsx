@@ -8,8 +8,6 @@ export default function OrderForm({ total }) {
 	const { setCartList, cartList, totalPrice } = useContext(CartContext)
 	const userNameInput = useRef()
 
-	console.log(totalPrice)
-
 	function handlePostOrder() {
 		if (cartList != "" && userNameInput.current.value != "") {
 			const url = ORDER_URL

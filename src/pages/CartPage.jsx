@@ -6,7 +6,6 @@ export default function CartPage() {
 	return (
 		<div className="container card my-5 p-5 bg-light">
 			<OrderList />
-			{/* <OrderForm /> */}
 		</div>
 	)
 }

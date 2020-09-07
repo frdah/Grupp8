@@ -1,8 +1,6 @@
 import React from "react"
 import { useContext } from "react"
 import { CartContext } from "../contexts/CartContext"
-// import { useContext } from "react";
-// import { CartContext } from "../contexts/CartContext";
 
 export default function ProductDetails({
 	name,
@@ -18,9 +16,7 @@ export default function ProductDetails({
 		qty: 1,
 	}
 	const { cartList, setCartList } = useContext(CartContext)
-	// const { name, description, price, stock, imageArr, rating } = useContext(
-	//   CartContext
-	// );
+
 	function handleOnClick() {
 		if (localStorage.getItem("itemArr") === null) {
 			const itemArr = []
@@ -30,14 +26,12 @@ export default function ProductDetails({
 
 			localStorage.setItem("itemArr", JSON.stringify(itemArr))
 
-			console.log("in if 1")
 		} else {
 			const itemArr = JSON.parse(localStorage.getItem("itemArr"))
 
 			let isNewObject = true
 
 			const updatedArr = itemArr.map((item, index) => {
-				console.log("Current name is: ", name)
 				if (item.name === name) {
 					item.qty++
 					isNewObject = false
@@ -47,12 +41,10 @@ export default function ProductDetails({
 			if (isNewObject) {
 				updatedArr.push(itemObj)
 			}
-			console.log(updatedArr)
-
+			
 			setCartList(updatedArr)
 			localStorage.setItem("itemArr", JSON.stringify(updatedArr))
 		}
-
 	}
 
 	return (
